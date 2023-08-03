@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Jura', sans-serif;
+    color: #08db06;
+    background: linear-gradient(90deg,#bddb06,#08db06);
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    background: url('../images/bg.png');
+}
+
+#message {
+    font-size: 2rem;
+    color: white;
+}
+
+table {
+    border-collapse: collapse;
+}
+td {
+    width: 100px;
+    height: 100px;
+    border: 1px solid white;
+    text-align: center;
+    font-size: 36px;
+    cursor: pointer;
+}
+.green-bg {
+    background-color: green;
+}
+.red-bg {
+    background-color: red;
+}
+
+.opponent-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.opponent-container .opponent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
+}
+
+button {
+    border: none;
+    border-radius: .5rem;
+    padding: .8rem 1.5rem;
+    background: linear-gradient(90deg,#bddb06,#08db06);
+    font-family: 'Jura', sans-serif;
+    margin-right: 1rem;
+    cursor: pointer;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+button:disabled {
+    cursor: default;
+}

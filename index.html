@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic-Tac-Toe Game</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+
+        </div>
+        <h1>Tic-Tac-Toe</h1>
+        <table id="board">
+            <tr>
+                <td onclick="makeMove(this, getOpponentType())"></td>
+                <td onclick="makeMove(this, getOpponentType())"></td>
+                <td onclick="makeMove(this, getOpponentType())"></td>
+            </tr>
+            <tr>
+                <td onclick="makeMove(this, getOpponentType())"></td>
+                <td onclick="makeMove(this, getOpponentType())"></td>
+                <td onclick="makeMove(this, getOpponentType())"></td>
+            </tr>
+            <tr>
+                <td onclick="makeMove(this, getOpponentType())"></td>
+                <td onclick="makeMove(this, getOpponentType())"></td>
+                <td onclick="makeMove(this, getOpponentType())"></td>
+            </tr>
+        </table>
+        <p id="message">It is X's turn</p>
+        <div class="opponent-container">
+            <div class="opponent">
+                <input type="radio" id="player" name="opponent" value="player" onchange="opponentTypeChanged()"> <label for="player">Player v Player</label>
+            </div>
+            <div class="opponent">
+                <input type="radio" id="computer" name="opponent" value="computer" onchange="opponentTypeChanged()"> <label for="computer">Player v Computer</label>
+            </div>
+        </div>
+        <div>
+            <button onclick="startRestart()">Start/Restart</button>
+            <button id="playAgain" onclick="playAgain()" disabled>Play Again?</button>
+        </div>
+    </div>
+    
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
