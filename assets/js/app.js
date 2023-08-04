@@ -1,10 +1,20 @@
     var currentPlayer = '';
     var gameOver = false;
-    
+    var startTime = null;
+    var xwin = 0;
+    var xlose = 0;
+    var owin = 0;
+    var olose = 0;
+    var tie = 0;
+
     function makeMove(cell, type) {
         if(getOpponentType() === null) {
             alert('Plase select game type!');
         }else {
+            if (startTime === null) {
+                startTime = new Date();
+                updateElapsedTime();
+            }
             if (!cell.textContent && !gameOver) {
                 cell.textContent = currentPlayer;
                 checkWin();
@@ -31,7 +41,7 @@
     }
 
     function checkWin() {
-        const cells = document.querySelectorAll('td');
+        const cells = document.querySelectorAll('#board td');
 
         const winningCombos = [
                 [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -48,7 +58,7 @@
                 cells[c].classList.add('green-bg');
                 document.getElementById('message').textContent = `${cells[a].textContent} wins!`;
                 document.getElementById('playAgain').disabled = false;
-                
+                calculateScore(cells[a].textContent);
                 return;
             }
         }
@@ -57,11 +67,13 @@
             cells.forEach(cell => cell.classList.add('red-bg'));
             document.getElementById('message').textContent = "It's a tie!";
             document.getElementById('playAgain').disabled = false;
+            updateTie();
         }
     }
 
     function startRestart() {
-        const cells = document.querySelectorAll('td');
+        startTime = null;
+        const cells = document.querySelectorAll('#board td');
         cells.forEach(cell => {
             cell.textContent = '';
             cell.classList.remove('green-bg', 'red-bg');
@@ -93,7 +105,7 @@
     }
 
     function computerMove() {
-        const emptyCells = [...document.querySelectorAll('td')].filter(cell => !cell.textContent);
+        const emptyCells = [...document.querySelectorAll('#board td')].filter(cell => !cell.textContent);
         if (emptyCells.length > 0) {
             const randomIndex = Math.floor(Math.random() * emptyCells.length);
             const chosenCell = emptyCells[randomIndex];
@@ -107,4 +119,41 @@
 
     function opponentTypeChanged() {
         startRestart();
+    }
+
+    function updateElapsedTime() {
+        const currentTime = new Date();
+        const timeDifference = currentTime - startTime;
+        const secondsElapsed = Math.floor(timeDifference / 1000);
+    
+        const timeElapsedElement = document.getElementById('timeElapsed');
+        timeElapsedElement.textContent = `Time elapsed: ${secondsElapsed} seconds`;
+    
+        if (!gameOver) {
+            requestAnimationFrame(updateElapsedTime); 
+        }
+    }
+
+    function calculateScore(player) {
+        if(player == 'X') {
+            xwin++;
+            olose++;
+        }else {
+            owin++;
+            xlose++;
+        }
+        updateScore();
+    }
+    function updateTie() {
+        tie++;
+        updateScore();
+    }
+
+    function updateScore() {
+        document.getElementById('xwin').innerText = xwin.toString();
+        document.getElementById('xlose').innerText = xlose.toString();
+        document.getElementById('owin').innerText = owin.toString();
+        document.getElementById('olose').innerText = olose.toString();
+        document.getElementById('tie').innerText = tie.toString();
+        document.getElementById('total').innerText = xwin + owin + tie;
     }
